@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const { signIn, signUp, signOut } = require('../proceduce/login.js');
+const { signIn: signIn , signUp, signOut } = require('../proceduce/login.js');
 
 /* GET users listing. */
 router.get('/', (req, res, next) => {
