@@ -1,0 +1,25 @@
+{
+  "name": "week2",
+  "version": "1.0.0",
+  "description": "week2_execise",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/irish-luong/nodejs-basic-course.git"
+  },
+  "author": "duc_luong",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/irish-luong/nodejs-basic-course/issues"
+  },
+  "homepage": "https://github.com/irish-luong/nodejs-basic-course#readme",
+  "dependencies": {
+    "date-fns": "^2.0.0-alpha.27",
+    "moment-timezone": "^0.5.23",
+    "readline": "^1.3.0",
+    "xlsx": "^0.14.2"
+  }
+}
