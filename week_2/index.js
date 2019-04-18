@@ -1,56 +1,35 @@
-/* 
-Task 01
-Create new project folder (you are free to choose its name)
-Use npm init to create a package.json and a new Node.js project from scratch
-Create index.js in the project folder and write some code to satisfy below test case
-Try to run the project with node command in terminal
-The Node.js app must satisfy following test case:
-*/
 
+// TASK_1
+/*Import libary readline for submit informations from command line */
+const readline = require('readline').createInterface({
+    input: process.stdin,
+    output: process.stdout,
+});
 
-// const readline = require('readline').createInterface({
-//     input: process.stdin,
-//     output: process.stdout,
-// });
+// Fucntion get time gap between current date to a specific date
+var getAge = dob => {
+    return new Date().getFullYear() - new Date(dob).getFullYear();
+};
 
-// var getAge = dob => {
-//     return new Date().getFullYear() - new Date(dob).getFullYear();
-// };
+var task_1 = () => {
+    let promise = new Promise((resolve, reject) => {
+        readline.question(`what is your name: `, (name) => {
+            readline.question('What is your date of birth (YYYY-MM-DD)', (dob) => {
+                readline.question('What is your home town?', (town) => {
+                    console.log (`🍀 Hello ${name}, so you are ${getAge(dob)} year old and from ${town}.🍀`);
+                    return resolve(`🍀 Hello ${name}, so you are ${getAge(dob)} year old and from ${town}.🍀`);
+                });
+            });
+        });
+    });
 
-// var reply;
-// readline.question(`what is your name: `, name => {
-//     reply = `🍀 Hello ${name}, `;
-//     readline.question('What is your date of birth (YYYY-MM-DD)', dob => {
-//         let age = getAge(dob);
-//         reply += `so you are ${age} year old `;
-//         readline.question('What is your home town?', town => {
-//             reply += `and from ${town}.`;
-//             console.log(reply);
-//         });
-//     });
-// });
+    return promise;
+};
 
-
-/*
-Task 02
-Use fs.readFile() to read the products.json file and convert it to JS object.
-Print the total number of products to console.
-Convert dateUpdated of each item into real Date. (same property name)
-Hint: Using Array.prototype.forEach and Date() constructor
-Install date-fns@next (2.x-alpha version) into the project
-Print the list to the console with following template for each product:
-${name} - ${price}VND - Cập nhật cách đây: ${fromNow}
-Format the price with comma (,) as thousand separators. (Google for a snippet)
-Use date-fns formatDistance to convert dateUpdated to fromNow with Vietnamese locale
-*/
-
-
-
-/*
-Use fs.readFile() to read the products.json file and convert it to JS object.
-*/
-//Require fs
+//TASK_2
 const fs = require('fs');
+var formatDistance = require('date-fns/formatDistance');
+var numFormat = new Intl.NumberFormat();
 
 // Readfile JSON and convert to Object with JSON.parse
 var readJson = (pathToFile, callback) => {
@@ -59,107 +38,106 @@ var readJson = (pathToFile, callback) => {
         callback(JSON.parse(data));
     })
 };
-// //Test to debug
-// readJson('./product.json', (data)=> {
-//     console.log(data);
-// });
 
-// /* Count total product by name */
-// var countAll = (arr, field) => {
-//     let countResult = {}
-//     arr.forEach((obj) => {
-//         let keys = Object.getOwnPropertyNames(obj);
-//         keys.forEach(async (element) => {
-//             if (countResult.hasOwnProperty(element)) {
-//                 countResult[element]["countAll"]++;
-//                 if (countResult[element]["items"].includes(obj[element]) === false) {
-//                     countResult[element]["countDistinct"]++;
-//                     countResult[element]["items"].push(obj[element]);
-//                 }
-//             } else {
-//                 countResult[element] = {
-//                     "countAll": 1,
-//                     "countDistinct": 1,
-//                     "items": [obj[element]]
-//                 }
-//             }
-//         });
-//     });
-//     if (countResult.hasOwnProperty(field)){
-//         return(countResult[field]);
-//     } else{
-//         return ("Field is not find");
-//     }
-    
-// }
+/* Count and group by every attribute */
+var countAll = (arr, field) => {
+    let countResult = {}
+    arr.forEach((obj) => {
+        let keys = Object.getOwnPropertyNames(obj);
+        keys.forEach(async (element) => {
+            if (countResult.hasOwnProperty(element)) {
+                countResult[element]["countAll"]++;
+                if (countResult[element]["items"].includes(obj[element]) === false) {
+                    countResult[element]["countDistinct"]++;
+                    countResult[element]["items"].push(obj[element]);
+                }
+            } else {
+                countResult[element] = {
+                    "countAll": 1,
+                    "countDistinct": 1,
+                    "items": [obj[element]]
+                }
+            }
+        });
+    });
+    if (countResult.hasOwnProperty(field)) {
+        return (countResult[field]["countDistinct"]);
+    } else {
+        return ("Field is not find");
+    }
 
-// //type in count_all or count_distinct
-// var countByAttribute = (pathToFile, field) => {
-//     readJson(pathToFile, (data) => {
-//         console.log(countAll(data, field));
-//     })
-// }
-// countByAttribute('./product.json', 'name');
+}
 
-// var formatDistance = require('date-fns/formatDistance');
-// var viLocale = require('date-fns/locale/vi')
-// var numFormat = new Intl.NumberFormat();
+//type in count_all or count_distinct
+var task_2_1 = (pathToFile, field) => {
+    let promise = new Promise((resolve, reject)=> {
+        readJson(pathToFile, (data) => {
+            let result = (countAll(data, field));
+            return resolve(result);
+        });
+    });
+    return promise;
+}
 
-// var formatInfo = (pathToFile) => {
-//     readJson(pathToFile, (data) => {
-//         data.forEach((element) => {
-//             let fromNow = formatDistance(new Date(element["dateUpdated"]), new Date , {locale: viLocale});
-//             let price = numFormat.format(element["price"] * 1000);
-//             console.log(`${element["id"]} - ${element["name"]} - ${price}VND - Cập nhật cách đây ${fromNow}`);
-//         });
-//     })
-// };
-
-// formatInfo('./product.json');
-
-/*
-TASK 3
-Create new field updated from dateUpdated with following format: MM/DD/YYYY (use date-fns)
-Delete dateUpdated field (we don't want to generate this column later to Excel)
-Install xlsx into the previously created project
-Use xlsx library to convert products.json to a Microsoft Excel file buffer
-Write the buffer to hard drive as products.xlsx and should be able to open in Excel.
-*/
-
-var format = require('date-fns/format');
-var viLocale = require('date-fns/locale/vi');
-var XLSX = require('xlsx');
-var a = [
-    {
-    "id": "3501",
-    "name": "Rustic Rubber Chair",
-    "price": 59000,
-    "category": "Mouse",
-    "dateUpdated": "Mon Jan 01 2018 00:00:00 GMT+0100 (CET)"
-    },
-    {
-    "id": "3069",
-    "name": "Sleek Concrete Chips",
-    "price": 105000,
-    "category": "Car",
-    "dateUpdated": "Mon Jan 01 2018 00:00:00 GMT+0100 (CET)"
-    }]
-
-
-var exportExcelFromJson = (importFile, exportFile) => {
-    readJson(importFile, (data) => {
-        data.forEach((element) => {
-            element["updated"] = (format( new Date(element["dateUpdated"]), 'MM/dd/yyyy', {locale: viLocale}));
-            delete element.dateUpdated;
+var taks_2_2 = (pathToFile) => {
+    let promise = new Promise((resolve, reject) => {
+        readJson(pathToFile, (data) => {
+            let description = [];
+            data.forEach((element) => {
+                let fromNow = formatDistance(new Date(element["dateUpdated"]), new Date, {
+                    locale: viLocale
+                });
+                let price = numFormat.format(element["price"] * 1000);
+                description.push(`${element["id"]} - ${element["name"]} - ${price}VND - Cập nhật cách đây ${fromNow}`);
+            });
+            return resolve(description);
         })
-        var ws = XLSX.utils.json_to_sheet(data);
-        var wb = XLSX.utils.book_new();
-        XLSX.utils.book_append_sheet(wb, ws)
-        console.log(ws);
-        XLSX.writeFile(wb, exportFile);
-        console.log("done");
+    })
+    return promise;
+};
+
+//TASK_3
+
+const format = require('date-fns/format');
+const viLocale = require('date-fns/locale/vi');
+const XLSX = require('xlsx');
+
+var readJson = (pathToFile, callback) => {
+    fs.readFile(pathToFile, (err, data) => {
+        if (err) throw err;
+        callback(JSON.parse(data));
     })
 };
-exportExcelFromJson("product.json", "data.xlsx");
 
+var task_3 = (importFile, exportFile) => {
+    let promise = new Promise((resolve, reject) => {
+        readJson(importFile, (data) => {
+            data.forEach((element) => {
+                element["updated"] = (format( new Date(element["dateUpdated"]), 'MM/dd/yyyy', {locale: viLocale}));
+                delete element.dateUpdated;
+            })
+            var ws = XLSX.utils.json_to_sheet(data);
+            var wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, ws)
+            XLSX.writeFile(wb, exportFile);
+            return resolve(ws);
+        });
+    });
+    return promise;
+};
+
+
+// DEBUG
+var debug =  async () => {
+    await task_1();
+    var task_2 = await task_2_1('./product.json', 'name');
+    console.log(task_2);
+    var task_2_2_run = await taks_2_2('./product.json');
+    console.log(task_2_2_run);
+    // console.log('Done task_2_2_run');
+    var task_3_run = await task_3("product.json", "data.xlsx");
+    console.log(task_3_run);
+    // console.log('Done task_3_run');
+};
+debug()
 
