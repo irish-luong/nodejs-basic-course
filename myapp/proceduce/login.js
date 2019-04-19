@@ -105,7 +105,6 @@ var signOut = (_id, callback) => {
 // signUp('duclmq_3@gmail.com', 'hello', (err, result) => {
 //     console.log('result= ${result}');
 // });
-
 // signIn('duclmq_3@gmail.com', 'hello', (errorCode, message, signin, userInfo) => {
 //     console.log({
 //         "errorCode": errorCode,
