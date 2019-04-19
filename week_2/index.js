@@ -134,10 +134,8 @@ var debug =  async () => {
     console.log(task_2);
     var task_2_2_run = await taks_2_2('./product.json');
     console.log(task_2_2_run);
-    // console.log('Done task_2_2_run');
     var task_3_run = await task_3("product.json", "data.xlsx");
     console.log(task_3_run);
-    // console.log('Done task_3_run');
 };
 debug()
 
