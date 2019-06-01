@@ -1,0 +1,88 @@
+<head>
+	<title>{{title}}</title>
+	<link rel='stylesheet' href='/vendor/bootstrap/css/bootstrap.min.css' />
+	<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' />
+	<link rel='stylesheet' href='/stylesheets/chat.css' />
+
+	<link rel="icon" href="/favicon.png">
+</head>
+<body>
+	<div class="container">
+		<h3 class=" text-center">NordicCoder Node.js Chat Demo</h3>
+		<div class="messaging">
+			<div class="inbox_msg">
+				<div class="inbox_people">
+					<div class="headind_srch">
+						<div class="recent_heading"><h4 id="member-count">Members</h4></div>
+						<div class="srch_bar">
+							<div class="stylish-input-group">
+								<input type="text" class="search-bar" placeholder="Search" />
+								<span class="input-group-addon">
+									<button type="button"><i class="fa fa-search" aria-hidden="true"></i></button>
+								</span>
+							</div>
+						</div>
+					</div>
+					<div class="inbox_chat">
+						<div class="chat_list active_chat">
+							<div id="current-user" class="chat_people">
+								<div class="chat_img"><img id="user-avatar" src="{{user.avatar}}" alt="{{user.name}}" /></div>
+								<div class="chat_ib">
+									<h5><input id="user-name" type="text" value="{{user.name}}"/> <span class="chat_date">{{joinTime}}</span></h5>
+									<p>This is you.</p>
+								</div>
+							</div>
+						</div>
+						<!--
+						<div class="chat_list">
+							<div class="chat_people">
+								<div class="chat_img"><img src="https://ptetutorials.com/images/user-profile.png" alt="sunil" /></div>
+								<div class="chat_ib">
+									<h5>Sunil Rajput <span class="chat_date">Dec 25</span></h5>
+									<p>Test, which is a new approach to have all solutions astrology under one roof.</p>
+								</div>
+							</div>
+						</div>
+						-->
+					</div>
+				</div>
+				<div class="mesgs">
+					<div class="msg_history">
+						<div class="incoming_msg">
+							<div class="incoming_msg_img">
+								<img src="{{user.avatar}}" alt="{{user.name}}" />
+								<div class="received_msg_name">{{user.name}}</div>
+							</div>
+							<div class="received_msg">
+								<div class="received_withd_msg">
+									<p>Test which is a new approach to have all solutions</p>
+									<span class="time_date"> 11:01 AM | June 9</span>
+								</div>
+							</div>
+						</div><!-- /.incoming_msg -->
+
+						<!-- div class="outgoing_msg">
+							<div class="sent_msg">
+								<p>Test which is a new approach to have all solutions</p>
+								<span class="time_date"> 11:01 AM | June 9</span>
+							</div>
+						</div><!- /.outgoing_msg -->
+					</div><!-- /.msg_history -->
+
+					<div class="type_msg">
+						<div class="input_msg_write">
+							<input type="text" class="write_msg" placeholder="Type a message" />
+							<button class="msg_send_btn" type="button"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
+						</div>
+					</div><!-- /.type_msg -->
+				</div>
+			</div>
+
+			<p class="text-center top_spac">Powered by <a target="_blank" href="https://socket.io">Socket.io</a></p>
+		</div>
+	</div>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script src="/js/chat-client.js"></script>
+</body>

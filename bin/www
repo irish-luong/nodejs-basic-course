@@ -7,6 +7,9 @@
 var app = require('../app');
 var debug = require('debug')('myapp:server');
 var http = require('http');
+var telebot = require('../telegram/telebot')
+
+(telebot.hello())
 
 /**
  * Get port from environment and store in Express.

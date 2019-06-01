@@ -1,0 +1,47 @@
+<head>
+	<title>Nordic NodeJS Project - {{title}}</title>
+	{{> css}}
+</head>
+
+<body>
+	<div id="wrapper">
+
+		{{!-- Navigation --}}
+		<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+			{{> header}}
+			{{!-- end header --}}
+			{{> nav_left}}
+			{{!-- end nav left --}}
+		</nav>
+
+		<div id="page-wrapper">
+			{{#if dashboard}}
+				{{> dashboard}}
+			{{/if}}
+
+			{{#if list}}
+				{{> list}}
+			{{/if}}
+
+			{{#if productDetail}}
+				{{> product_detail}}
+			{{/if}}
+
+			{{#if productCreate}}
+				{{> product_create}}
+			{{/if}}
+
+			{{#if orderDetail}}
+				{{> order_detail}}
+			{{/if}}
+
+			{{#if orderCreate}}
+				{{> order_create}}
+			{{/if}}
+		</div>
+		<!-- /#page-wrapper -->
+
+	</div>
+
+	{{> js}}
+</body>
