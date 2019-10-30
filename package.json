@@ -32,7 +32,7 @@
     "hbs": "^4.0.4",
     "http-errors": "~1.6.2",
     "moment": "^2.24.0",
-    "mongoose": "^5.5.2",
+    "mongoose": "^5.7.5",
     "morgan": "~1.9.0",
     "node-telegram-bot-api": "^0.30.0",
     "parallel": "^1.2.0",
